@@ -1,0 +1,26 @@
+: Install new date command
+DEST=/bin
+if [ ! -f date ]; then
+   make date
+fi
+if [ ! -d $DEST/orig ]; then
+   mkdir $DEST
+   if [ ! -d $DEST/orig ]; then
+      echo "Failed to create $DEST/orig"
+      exit
+   fi
+fi
+if [ ! -f $DEST/orig/date ]; then
+   echo "Backing up $DEST/date to $DEST/orig"
+   mv $DEST/date $DEST/orig/date
+   if [ ! -f $DEST/orig/date ]; then
+      echo "Failed to create $DEST/orig"
+      exit
+   fi
+fi
+echo "Installing date"
+cp date $DEST
+if [ ! -f $DEST/date ]; then
+   echo "Installation failed"
+fi
+exit

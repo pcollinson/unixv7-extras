@@ -1,0 +1,9 @@
+#!/bin/sh
+# Script to test if [ is missing from /bin
+cd /bin
+if ! test -f '/bin/['; then
+    ln test '['
+    echo 'The [ command is now linked to test'
+else
+    echo 'The [ command exists'
+fi

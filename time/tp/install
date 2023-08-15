@@ -1,0 +1,27 @@
+: Install new tp command
+DEST=/bin
+if [ ! -f tp ]; then
+   make tp
+fi
+if [ ! -d $DEST/orig ]; then
+   mkdir $DEST
+   if [ ! -d $DEST/orig ]; then
+      echo "Failed to create $DEST/orig"
+      exit 1
+   fi
+fi
+if [ ! -f $DEST/orig/tp ]; then
+   echo "Backing up $DEST/tp to $DEST/orig"
+   mv $DEST/tp $DEST/orig/tp
+   if [ ! -f $DEST/orig/tp ]; then
+      echo "Failed to create $DEST/orig"
+      exit 1
+   fi
+fi
+echo "Installing tp"
+cp tp $DEST
+if [ ! -f $DEST/tp ]; then
+   echo "Installation failed"
+   exit 1
+fi
+exit 0

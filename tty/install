@@ -1,0 +1,42 @@
+:
+:	Install system programs
+:	Assume that the three binaries are compiled
+:	Backing up the originals
+BIN=/bin
+ETC=/etc
+
+for name in login stty getty; do
+    if [ ! -f $name ]; then
+       echo "$name doesn't exist; Run make after changing its LOCAL value in makefile"
+       exit
+    fi
+done
+
+for name in $BIN $ETC; do
+    if [ ! -d $name/orig ]; then
+       echo "Making $name/orig"
+       mkdir $name/orig
+    fi
+done
+
+for name in login stty; do
+    if [ ! -f $BIN/orig/$name ]; then
+       cp $BIN/$name $BIN/orig/$name
+    fi
+    if [ ! -f $BIN/orig/$name ]; then
+       echo 'Backup of $BIN/$name failed - exiting'
+       exit
+    fi
+    cp $name $BIN/$name
+done
+
+for name in getty; do
+    if [ ! -f $ETC/orig/$name ]; then
+       cp $ETC/$name $ETC/orig/$name
+    fi
+    if [ ! -f $ETC/orig/$name ]; then
+       echo 'Backup of $ETC/$name failed - exiting'
+       exit
+    fi
+    cp $name $ETC/$name
+done

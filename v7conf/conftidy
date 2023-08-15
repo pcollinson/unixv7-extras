@@ -1,0 +1,19 @@
+: Move unwanted config files to orig directory
+: Argument is the name of the sys/conf directory
+if [ $# -ne 1 ]; then
+   echo 'Usage conftidy confdir'
+   exit
+fi
+cd $1
+if [ ! -d orig ]; then
+   mkdir orig
+   if [ ! -d orig ]; then
+      echo "Failed to make orig directory"
+      exit
+   fi
+fi
+for name in hphtconf rktmconf rphtconf tconf hptmconf rkhtconf	rp1conf	rptmconf makefile; do
+    if [ -f $name ]; then
+       mv $name orig/$name
+    fi
+done

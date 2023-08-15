@@ -1,0 +1,232 @@
+.TH STTY 1
+.SH NAME
+stty \- set terminal options
+.SH SYNOPSIS
+.B stty
+[ option ... ]
+.SH DESCRIPTION
+.I Stty
+sets certain I/O options on the current output terminal.
+With no argument, it reports the current settings of the options.
+.SS Flags
+Flags can be turned off by adding a '-' character before the option.
+.TP  8n
+.B even
+allow even parity
+.br
+.ns
+.TP
+.B odd
+allow odd parity
+.br
+.ns
+.TP
+.B anyp
+allow any parity
+.br
+.ns
+.TP
+.B raw
+raw mode input
+(no erase, kill, interrupt, quit, EOT; parity bit passed back)
+.br
+.ns
+.TP
+.B cooked
+same as `\-raw'
+.br
+.ns
+.TP
+.B cbreak
+make each character available to
+.IR read \ (2)
+as received; no erase and kill.
+.br
+.ns
+.TP
+.B \-nl
+allow carriage return for new-line,
+and output CR-LF for carriage return or new-line
+When 'on', accept only new-line to end lines.
+.br
+.ns
+.TP
+.B echo
+echo back every character typed
+.br
+.ns
+.TP
+.B lcase
+map upper case to lower case
+.br
+.ns
+.TP
+.B tabs
+delete tabs from screen
+.br
+.ns
+.TP
+.B vdu
+When deleting remove characters from the screen using backspace. When
+off deleted characters are shown in square brackets.
+.br
+.ns
+.TP
+.B scope
+Synonym for vdu.
+.br
+.sp  2
+.SS Control character settings
+Control characters can be set  using '^' and an upper case letter,
+so '^C' will be interpreted as Control-C.
+.TP
+.BI erase  \ c\fR
+set erase character to
+.IR c .
+Default: ^C.
+.br
+.ns
+.TP
+.BI kill  \ c\fR
+set kill character to
+.IR c .
+All current input is deleted.
+Default: ^U
+.br
+.ns
+.TP
+.BI intr  \ c\fR
+set interrupt  character to
+.IR c .
+Default: ^C
+.br
+.ns
+.TP
+.BI quit  \ c\fR
+set quit character to
+.IR c .
+.br
+Default: ^\ (Control-backslash)
+.br
+.ns
+.TP
+.BI stop  \ c\fR
+set stop output character to
+.IR c .
+Default: ^S
+.br
+.ns
+.TP
+.BI start  \ c\fR
+set start output character to
+.IR c .
+Default: ^Q
+.br
+.ns
+.TP
+.BI eof  \ c\fR
+set end of file character
+.IR c .
+Default: ^D
+.br
+.ns
+.TP
+.BI brk  \ c\fR
+Set brk character
+.IR c .
+Default: brk (0377)
+.br
+.LP
+Other control characters that cannot be altered:
+.TP
+^P
+flip paging on and off
+.br
+.ns
+.TP
+^R
+retype current line
+.br
+.ns
+.TP
+^W
+delete last word
+.br
+.ns
+.TP
+^V
+Next character is entered with no processing
+.br
+.sp  2
+.SS Delays
+Delays are set by a control word immediately followed by a number, e.g
+nl0. The number is approximately the number kernel 'ticks' - 0-254. Mostly for
+screen use zero is used.
+.TP
+.B  cr
+.br
+select style of delay for carriage return.
+.br
+.ns
+.TP
+.B  nl
+.br
+select style of delay for linefeed
+.br
+.ns
+.TP
+.B  tab
+.br
+select style of delay for tab,
+.br
+.ns
+.TP
+.B  ff
+select style of delay for form feed
+.br
+.sp  2
+.SS Speeds
+.ns
+.TP
+.B  "50 75 110 134 150 200 300 600 1200 1800 2400 4800 9600 exta extb"
+.br
+Set terminal baud rate to the number given, if possible.
+(These are the speeds supported by the DH-11 interface).
+.TP
+.B 0
+Hang up the line immediately.
+.ns
+.br
+.TP
+.BI ispeed \ n\fR
+Set the input speed, the argument is a number or 'exta' or 'extb'.
+.ns
+.br
+.TP
+.BI ospeed \ n\fR
+Set the output speed, the argument is a number or 'exta' or 'extb'.
+.sp  2
+.SS "Other Options"
+.TP
+.B hup
+Set the flag that forces a hangup on last close.  Can be prefixed by '-'.
+.br
+.ns
+.TP
+.BI cols \ n\fR
+Set the width of the screen in characters
+.br
+.ns
+.TP
+.BI rows \ n\fR
+Set the number of lines on the screen
+.br
+.ns
+.TP
+.B sane
+Set all settings to default
+.br
+.SH "AUTHOR"
+Peter Collinson, July 2023
+.SH "SEE ALSO"
+ioctl(2), tabs(1)

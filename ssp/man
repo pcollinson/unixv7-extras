@@ -1,0 +1,4 @@
+if [ $# -eq 0 ]; then
+	exit
+fi
+/bin/man "$@" | ssp

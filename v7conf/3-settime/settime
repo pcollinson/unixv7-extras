@@ -1,0 +1,8 @@
+: read 16 bytes from dectape
+: containing a date command
+rm -f /tmp/setdate
+dd if=/dev/tap0 of=/tmp/setdate bs=1 count=16 2> /dev/null
+if [ -f /tmp/setdate ]; then
+	/bin/sh /tmp/setdate
+fi
+rm -f /tmp/setdate

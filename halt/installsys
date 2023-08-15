@@ -1,0 +1,34 @@
+#!/bin/sh
+# install new files into the system
+DEST=/usr/sys
+DESTCONF=$DEST/conf
+DESTSYS=$DEST/sys
+
+# make backup files
+if test ! -d $DESTCONF/orig ; then
+   echo Making $DESTCONF/orig
+   mkdir $DESTCONF/orig
+fi
+if test ! -f $DESTCONF/orig/mch.s ; then
+   echo Backup of mch.s in
+   cp $DESTCONF/mch.s $DESTCONF/orig/mch.s
+fi
+echo Copy mch.s to $DESTCONF
+cp mch.s $DESTCONF
+
+if test ! -d $DESTSYS/orig ; then
+   echo Making $DESTSYS/orig
+   mkdir $DESTSYS/orig
+fi
+for sysfile in sysent.c sys4.c; do
+    if test ! -f $DESTSYS/orig/$sysfile ; then
+       echo Backup of $sysfile in $DESTSYS
+       cp $DESTSYS/$sysfile $DESTSYS/orig/
+    fi
+    echo cp $sysfile $DESTSYS
+done
+echo 'Now rebuild the system'
+echo 'You will need to do'
+echo 'make all'
+echo 'then'
+echo 'make unix'
