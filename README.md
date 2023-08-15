@@ -2,7 +2,7 @@
 
 Having spent some time working on UNIX V6 using the SIMH machine emulator for the PDP11/40. I decided to do the same for UNIX V7.
 
-The version I've used runs on a simulated PDP11/70 and is from Keith Bostic. It can be found on [The Unix Heritage Society archive](https://www.tuhs.org/Archive/Distributions/Research/Keith_Bostic_v7]). It is a tape that you can unpack to create a single RP06 image. You can avoid the tape unpacking and use the RP06 disk image in these files [see v7conf/distro](v7conf/distro).
+The version I've used runs on a simulated PDP11/70 and is from Keith Bostic. It can be found on [The Unix Heritage Society archive](https://www.tuhs.org/Archive/Distributions/Research/Keith_Bostic_v7]). It is a tape that you can unpack to create a single RP06 image. You can avoid the tape unpacking and use the RP06 disk image [see bootstrap](bootstrap).
 
 I must acknowledge the work of the folks at [The Unix Heritage Society](https://www.tuhs.org) who have made it their business to collect old source and versions of the Unix system. Along with all the people that made tapes and so left us some history. The  [TUHS archive](https://www.tuhs.org/Archive/) is a goldmine for people looking back at what was done.
 
